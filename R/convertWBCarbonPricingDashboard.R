@@ -35,7 +35,7 @@ convertWBCarbonPricingDashboard <- function(x, subtype) {
   }
 
   if (subtype == "emissions") {
-    x[EU_ETS,,] <- x * magclass::dimSums(emi,1)
+    x <- x * magclass::dimSums(emi,1)
   }
 
   x[is.na(x)] <- 0 # setting NA values to zero
