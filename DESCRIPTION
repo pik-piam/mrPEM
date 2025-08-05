@@ -13,10 +13,11 @@ Description: Prepare data to be used by the Political Economy Model (PEM).
 License: MIT + file LICENSE
 URL: https://github.com/pik-piam/mrPEM
 Depends:
+    madrat,
+    magclass,
+    mrremind
 Imports:
   dplyr,
-  madrat,
-  magclass,
   readxl,
   tidyr
 Suggests:
