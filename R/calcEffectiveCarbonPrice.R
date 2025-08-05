@@ -13,7 +13,7 @@
 #' }
 #'
 #' @importFrom madrat readSource
-#' @importFrom magclass dimReduce
+#' @importFrom magclass dimReduce collapseNames
 #' @export
 #'
 calcEffectiveCarbonPrice <- function() {
@@ -22,12 +22,15 @@ calcEffectiveCarbonPrice <- function() {
   d.emissions <- madrat::readSource("WBCarbonPricingDashboard", subtype = "emissions")
 
   # calculate effective carbon price
-  d.effectivePrice <- magclass::dimReduce(d.price[,intersect(getYears(d.price),getYears(d.emissions)),] * d.emissions[,intersect(getYears(d.price),getYears(d.emissions)),][,,"implemented"])
+  d.effectivePrice <- magclass::dimReduce(mselect(d.price[,intersect(getYears(d.price),getYears(d.emissions)),intersect(getNames(d.price),getNames(d.emissions))] * d.emissions[,intersect(getYears(d.price),getYears(d.emissions)),intersect(getNames(d.price),getNames(d.emissions))],status="implemented"))
+
+  # GDP per capita
+  gdpPc <- calcOutput("GDPpc", scenario = "SSP2", aggregate = FALSE, supplementary = TRUE)
+  w <- magclass::collapseNames(gdpPc$weight)
 
   return(list(x = d.effectivePrice,
-              weight = NULL,
+              weight = w,
               min = 0,
               description = "Effective carbon price based on the World Bank dashboard data",
               unit = "US$2017/t CO2"))
-
 }
