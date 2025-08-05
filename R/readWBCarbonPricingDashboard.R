@@ -29,10 +29,8 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
     rename_with(~gsub(" ", "_", tolower(.x)))
 
   wb.regionMapping <- toolGetMapping("wbRegion.csv", type = "regional", where = "mrPEM")
-  #wb.regionMapping <- madrat::toolGetMapping("wbRegion.csv", type = "regional", where = "local")
 
   wb.sectoralMapping <- toolGetMapping("wbSector.csv", type = "sectoral", where = "mrPEM")
-  #wb.sectoralMapping <- madrat::toolGetMapping("wbSector.csv", type = "sectoral", where = "local")
 
   d.metadata <- raw.info  %>%
     left_join(wb.regionMapping, by = "unique_id") %>%
