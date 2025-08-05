@@ -22,7 +22,7 @@ calcEffectiveCarbonPrice <- function() {
   d.emissions <- madrat::readSource("WBCarbonPricingDashboard", subtype = "emissions")
 
   # calculate effective carbon price
-  d.effectivePrice <- d.price * d.emissions
+  d.effectivePrice <- d.price[,intersect(getYears(d.price),getYears(d.emissions)),] * d.emissions[,intersect(getYears(d.price),getYears(d.emissions)),]
 
   return(list(x = d.effectivePrice,
               weight = NULL,
