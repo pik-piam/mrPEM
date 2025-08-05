@@ -98,23 +98,23 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
     filter(!(is.na(.data$value)))
 
   d.revenue <- raw.revenue %>%
-    dplyr::select(c("instrument_name", all_of(names(raw.emissions)[suppressWarnings(!is.na(as.numeric(names(raw.emissions))))]))) %>%
+    dplyr::select(c("instrument_name", all_of(names(raw.revenue)[suppressWarnings(!is.na(as.numeric(names(raw.revenue))))]))) %>%
     dplyr::left_join(d.metadata %>%
                       dplyr::select(c("unique_id", "instrument_name"))
                     , by = "instrument_name") %>%
     left_join(wb.regionMapping, by = "unique_id") %>%
     left_join(wb.sectoralMapping, by = "unique_id") %>%
     left_join(d.metadata %>% select(c("unique_id", "type", "status")) , by = "unique_id") %>%
-    dplyr::select(c("unique_id", "region", "region_type", "type", "status", "sector_group", all_of(names(raw.emissions)[suppressWarnings(!is.na(as.numeric(names(raw.emissions))))]))) %>%
+    dplyr::select(c("unique_id", "region", "region_type", "type", "status", "sector_group", all_of(names(raw.revenue)[suppressWarnings(!is.na(as.numeric(names(raw.revenue))))]))) %>%
     pivot_longer(-c("unique_id", "region", "region_type", "type", "status", "sector_group"), names_to = "period", values_to = "value") %>%
     filter(!(is.na(.data$value)))
 
   d.price <- raw.price %>%
-    dplyr::select(c("unique_id", all_of(names(raw.emissions)[suppressWarnings(!is.na(as.numeric(names(raw.emissions))))]))) %>%
+    dplyr::select(c("unique_id", all_of(names(raw.price)[suppressWarnings(!is.na(as.numeric(names(raw.price))))]))) %>%
     left_join(wb.regionMapping, by = "unique_id") %>%
     left_join(wb.sectoralMapping, by = "unique_id") %>%
     left_join(d.metadata %>% select(c("unique_id", "type", "status")) , by = "unique_id") %>%
-    dplyr::select(c("unique_id", "region", "region_type", "type", "status", "sector_group", all_of(names(raw.emissions)[suppressWarnings(!is.na(as.numeric(names(raw.emissions))))]))) %>%
+    dplyr::select(c("unique_id", "region", "region_type", "type", "status", "sector_group", all_of(names(raw.price)[suppressWarnings(!is.na(as.numeric(names(raw.price))))]))) %>%
     pivot_longer(-c("unique_id", "region", "region_type", "type", "status", "sector_group"), names_to = "period", values_to = "value") %>%
     filter(!(is.na(.data$value)))
   
