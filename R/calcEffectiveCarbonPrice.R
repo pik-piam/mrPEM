@@ -13,11 +13,12 @@
 #' }
 #'
 #' @importFrom madrat readSource
+#' @importFrom magclass dimReduce
 #' @export
 #'
 calcEffectiveCarbonPrice <- function() {
 
-  d.price <- madrat::readSource("WBCarbonPricingDashboard", subtype = "price")
+  d.price <- magclass::dimReduce(madrat::readSource("WBCarbonPricingDashboard", subtype = "price")[,,"implemented"])
   d.emissions <- madrat::readSource("WBCarbonPricingDashboard", subtype = "emissions")
 
   # calculate effective carbon price
