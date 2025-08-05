@@ -31,7 +31,7 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
   wb.regionMapping <- toolGetMapping("wbRegion.csv", type = "regional", where = "mrPEM")
   #wb.regionMapping <- madrat::toolGetMapping("wbRegion.csv", type = "regional", where = "local")
 
-  wb.sectoralMapping <- toolGetMapping("wbSector.csv", type = "regional", where = "mrPEM")
+  wb.sectoralMapping <- toolGetMapping("wbSector.csv", type = "sectoral", where = "mrPEM")
   #wb.sectoralMapping <- madrat::toolGetMapping("wbSector.csv", type = "sectoral", where = "local")
 
   d.metadata <- raw.info  %>%
