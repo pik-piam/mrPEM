@@ -1,7 +1,6 @@
-#' @title calc WBCarbonPricingDashboard
-#' @description calculate the Effective Carbon Price based on the World Bank dashboard data
+#' Calculate the Effective Carbon Price based on the World Bank dashboard data
 #'
-#' @note Effective Carbon Price is calculated from world banck emissions share coverage,
+#' Effective Carbon Price is calculated from world banck emissions share coverage,
 #' EDGAR Global GHG Emissions and World Bank Carbon Price data.
 #'
 #' @returns MAgPIE object with Effective Carbon Price per country and sector group
