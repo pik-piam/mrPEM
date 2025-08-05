@@ -18,11 +18,11 @@
 #'
 calcEffectiveCarbonPrice <- function() {
 
-  d.price <- magclass::dimReduce(madrat::readSource("WBCarbonPricingDashboard", subtype = "price")[,,"implemented"])
+  d.price <- madrat::readSource("WBCarbonPricingDashboard", subtype = "price")
   d.emissions <- madrat::readSource("WBCarbonPricingDashboard", subtype = "emissions")
 
   # calculate effective carbon price
-  d.effectivePrice <- d.price[,intersect(getYears(d.price),getYears(d.emissions)),] * d.emissions[,intersect(getYears(d.price),getYears(d.emissions)),]
+  d.effectivePrice <- magclass::dimReduce(d.price[,intersect(getYears(d.price),getYears(d.emissions)),] * d.emissions[,intersect(getYears(d.price),getYears(d.emissions)),][,,"implemented"])
 
   return(list(x = d.effectivePrice,
               weight = NULL,
