@@ -10,7 +10,7 @@
 #'
 #' @author Renato Rodrigues
 #' 
-#' @importFrom madrat calcOutput toolCountryFill
+#' @importFrom madrat calcOutput toolCountryFilln toolFillYears
 #' @importFrom magclass dimSums getYears<- getYears mbind
 #' @export
 #'
@@ -39,7 +39,10 @@ convertWBCarbonPricingDashboard <- function(x, subtype) {
   }
 
   x[is.na(x)] <- 0 # setting NA values to zero
+  x <- x[,sort(magclass::getYears(x, as.integer = T)),]
+  x <- madrat::toolFillYears(x, sort(magclass::getYears(x, as.integer = T)))
   x <- madrat::toolCountryFill(x, fill = 0, verbosity = 2) # fill countries with no data
+  
 
   return(x)
 }
