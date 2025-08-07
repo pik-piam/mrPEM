@@ -2,18 +2,18 @@
 % Please edit documentation in R/calcEffectiveCarbonPrice.R
 \name{calcEffectiveCarbonPrice}
 \alias{calcEffectiveCarbonPrice}
-\title{calc WBCarbonPricingDashboard}
+\title{Calculate the Effective Carbon Price based on the World Bank dashboard data}
 \usage{
-calcEffectiveCarbonPrice()
+calcEffectiveCarbonPrice(subtype)
+}
+\arguments{
+\item{subtype}{data subtype. Either "emissionsCovered", "shareEmissionsCovered", "carbonPrice", "effectivePrice"}
 }
 \value{
 MAgPIE object with Effective Carbon Price per country and sector group
 }
 \description{
-calculate the Effective Carbon Price based on the World Bank dashboard data
-}
-\note{
-Effective Carbon Price is calculated from world banck emissions share coverage,
+Effective Carbon Price is calculated from world bank emissions share Coverage,
 EDGAR Global GHG Emissions and World Bank Carbon Price data.
 }
 \examples{
