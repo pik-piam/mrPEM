@@ -1,0 +1,14 @@
+^LICENSE\.md$
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.buildlibrary$
+^\.pre-commit-config\.yaml$
+^\.github$
+^.*\.zenodo.json$
+^codecov\.yml$
+^workflow$
+^.lintr$
+^tests/.lintr$
+^Makefile$
+^.*CITATION.cff$
+^\.git$

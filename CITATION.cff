@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using the metadata from this file.
+type: software
+title: 'mrPEM: Prepare data to be used by the Political Economy Model (PEM)'
+version: 0.0.1
+date-released: '2025-08-08'
+abstract: Prepare data to be used by the Political Economy Model (PEM).
+authors:
+- family-names: Rodrigues
+  given-names: Renato
+  email: renato.rodrigues@pik-potsdam.de
+  orcid: https://orcid.org/0000-0002-5863-5514
+- family-names: Elmar
+  given-names: Kriegler
+  email: kriegler@pik-potsdam.de
+  orcid: https://orcid.org/0000-0002-3307-2647
+license: MIT
+repository-code: https://github.com/pik-piam/mrPEM
+
