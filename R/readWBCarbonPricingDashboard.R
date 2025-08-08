@@ -9,12 +9,11 @@
 #'
 #' @importFrom readxl read_excel
 #' @importFrom dplyr select all_of matches mutate left_join across filter %>% rename_with join_by group_by
-#' bind_rows case_when .data summarize coalesce where
+#' bind_rows case_when .data summarize coalesce
 #' @importFrom tidyr extract pivot_longer
 #' @importFrom magclass as.magpie
 #' @importFrom madrat toolCountryFill toolGetMapping
 #' @importFrom quitte as.quitte
-#' @export
 #'
 readWBCarbonPricingDashboard <- function(subtype = "price") {
 
@@ -145,7 +144,7 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
          "revenue" = { dd <- wbRevenue }, # nolint
          "wbCoverage" = { dd <- wbCoverage }, # nolint
          "priceAprilFirst" = { dd <- priceAprilFirst }, # nolint
-         "emissions_coverage" = { dd <- wbEmissionsCovered }) # nolint
+         "emissions_covered" = { dd <- wbEmissionsCovered }) # nolint
 
   #expand EU ETS data to all EU countries
   EU27 <- c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA", "DEU", "GRC", "HUN", "IRL", "ITA", # nolint
@@ -173,7 +172,7 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
       dplyr::mutate(period = as.character(.data$period))
     emiBulkShare <- wbEmissionsCovered %>%
       filter(.data$unique_id == "ETS_EU") %>%
-      select(dplyr::where(~length(unique(.x)) > 1)) %>%
+      select(where(~length(unique(.x)) > 1)) %>%
       left_join(emiBulk %>% filter(.data$region %in% EU_ETS) %>% group_by(.data$period) %>% # nolint
                   summarize(value = sum(.data$value, na.rm = TRUE), .groups = "drop"),
                 by = "period", suffix = c("_emi", "_wb")) %>%

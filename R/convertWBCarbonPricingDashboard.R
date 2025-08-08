@@ -12,7 +12,6 @@
 #'
 #' @importFrom madrat calcOutput toolCountryFill toolFillYears
 #' @importFrom magclass dimSums getYears<- getYears mbind
-#' @export
 #'
 convertWBCarbonPricingDashboard <- function(x, subtype) {
 

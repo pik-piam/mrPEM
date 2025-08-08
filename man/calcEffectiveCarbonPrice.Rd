@@ -4,7 +4,7 @@
 \alias{calcEffectiveCarbonPrice}
 \title{Calculate the Effective Carbon Price based on the World Bank dashboard data}
 \usage{
-calcEffectiveCarbonPrice(subtype)
+calcEffectiveCarbonPrice(subtype = "effectivePrice")
 }
 \arguments{
 \item{subtype}{data subtype. Either "emissionsCovered", "shareEmissionsCovered", "carbonPrice", "effectivePrice"}

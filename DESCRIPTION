@@ -2,7 +2,7 @@ Type: Package
 Package: mrPEM
 Title: Prepare data to be used by the Political Economy Model (PEM)
 Version: 0.0.1
-Date: 2025-08-07
+Date: 2025-08-08
 Authors@R: c(
     person("Renato", "Rodrigues", , "renato.rodrigues@pik-potsdam.de", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5863-5514")),

@@ -16,12 +16,9 @@
 #' @importFrom madrat readSource
 #' @importFrom magclass dimReduce collapseNames getNames dimReduce getSets<- getYears
 #' @importFrom quitte as.quitte
-#' @importFrom dplyr rename
+#' @importFrom dplyr rename select mutate left_join across filter %>% bind_rows .data
 #'
-#' @importFrom dplyr select mutate left_join across filter %>% bind_rows .data
-#' @export
-#'
-calcEffectiveCarbonPrice <- function(subtype) {
+calcEffectiveCarbonPrice <- function(subtype = "effectivePrice") {
 
   priceRaw <- madrat::readSource("WBCarbonPricingDashboard", subtype = "price")
   priceFull <- magclass::dimReduce(magclass::dimSums(magclass::mselect(priceRaw, status = "implemented")
@@ -124,7 +121,6 @@ calcEffectiveCarbonPrice <- function(subtype) {
   pop <- calcOutput("PopulationPast", aggregate = FALSE)
   gdp <- calcOutput("GDPPast", aggregate = FALSE)
   gdpPerCapita <- magclass::collapseNames(gdp[, intersect(getYears(pop), getYears(gdp)), ] / pop[, intersect(getYears(pop), getYears(gdp)), ]) # nolint
-  #gdpPerCapita <- gdpPerCapita[, intersect(getYears(gdpPerCapita), getYears(effectivePrice)), ]
   #copying last year for missing years
   tmp <- tmp2 <- tmp3 <- gdpPerCapita[, 2022, ]
   magclass::getYears(tmp) <- 2023

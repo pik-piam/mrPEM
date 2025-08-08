@@ -3,7 +3,7 @@ message: If you use this software, please cite it using the metadata from this f
 type: software
 title: 'mrPEM: Prepare data to be used by the Political Economy Model (PEM)'
 version: 0.0.1
-date-released: '2025-08-07'
+date-released: '2025-08-08'
 abstract: Prepare data to be used by the Political Economy Model (PEM).
 authors:
 - family-names: Rodrigues

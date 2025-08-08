@@ -46,7 +46,7 @@ A BibTeX entry for LaTeX users is
 @Misc{,
   title = {mrPEM: Prepare data to be used by the Political Economy Model (PEM)},
   author = {Renato Rodrigues and Kriegler Elmar},
-  date = {2025-08-07},
+  date = {2025-08-08},
   year = {2025},
   url = {https://github.com/pik-piam/mrPEM},
   note = {Version: 0.0.1},
