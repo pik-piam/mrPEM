@@ -1,24 +1,22 @@
-#' Calculate the Effective Carbon Price based on the World Bank dashboard data
+#' Calculate Carbon Price value and emisssions coverage based on the World Bank dashboard data
 #'
-#' Effective Carbon Price is calculated from world bank emissions share Coverage,
-#' EDGAR Global GHG Emissions and World Bank Carbon Price data.
+#' Carbon Price data is calculated from World Bank carbon price, World Bank carbon price coverage shares,
+#' and EDGAR Global GHG Emissions for sectoral disaggregation.
 #'
 #' @param subtype data subtype. Either "emissionsCovered", "shareEmissionsCovered", "carbonPrice", "effectivePrice"
-#' @returns MAgPIE object with Effective Carbon Price per country and sector group
+#' @returns MAgPIE object with Carbon Price data per country and sector group
 #'
 #' @author Renato Rodrigues
 #'
 #' @examples
 #' \dontrun{
-#' calcOutput("WBCarbonPricingDashboard", subtype = "price")
+#' calcOutput("CarbonPrice", subtype = "effectivePrice")
 #' }
 #'
-#' @importFrom madrat readSource
-#' @importFrom magclass dimReduce collapseNames getNames dimReduce getSets<- getYears
 #' @importFrom quitte as.quitte
 #' @importFrom dplyr rename select mutate left_join across filter %>% bind_rows .data
 #'
-calcEffectiveCarbonPrice <- function(subtype = "effectivePrice") {
+calcCarbonPrice <- function(subtype = "effectivePrice") {
 
   priceRaw <- madrat::readSource("WBCarbonPricingDashboard", subtype = "price")
   priceFull <- magclass::dimReduce(magclass::dimSums(magclass::mselect(priceRaw, status = "implemented")
@@ -31,7 +29,7 @@ calcEffectiveCarbonPrice <- function(subtype = "effectivePrice") {
                            + setNames(magclass::mselect(priceFull, sector_group = "all"), "diffuse"),
                            magclass::mselect(priceFull, sector_group = "bunkers")))
 
-  wbEmissionsCoveredRaw <- madrat::readSource("WBCarbonPricingDashboard", subtype = "emissions_covered")
+  wbEmissionsCoveredRaw <- madrat::readSource("WBCarbonPricingDashboard", subtype = "emissionsCovered")
   wbEmissionsCovered <-
     magclass::dimReduce(magclass::dimSums(magclass::mselect(wbEmissionsCoveredRaw, status = "implemented")
                                           , 3.1, na.rm = TRUE))
@@ -122,11 +120,10 @@ calcEffectiveCarbonPrice <- function(subtype = "effectivePrice") {
   gdp <- calcOutput("GDPPast", aggregate = FALSE)
   gdpPerCapita <- magclass::collapseNames(gdp[, intersect(getYears(pop), getYears(gdp)), ] / pop[, intersect(getYears(pop), getYears(gdp)), ]) # nolint
   #copying last year for missing years
-  tmp <- tmp2 <- tmp3 <- gdpPerCapita[, 2022, ]
-  magclass::getYears(tmp) <- 2023
-  magclass::getYears(tmp2) <- 2024
-  magclass::getYears(tmp3) <- 2025
-  gdpPerCapita <- magclass::mbind(gdpPerCapita, tmp, tmp2, tmp3)
+  tmp <- tmp2 <- gdpPerCapita[, 2023, ]
+  magclass::getYears(tmp) <- 2024
+  magclass::getYears(tmp2) <- 2025
+  gdpPerCapita <- magclass::mbind(gdpPerCapita, tmp, tmp2)
 
   switch(subtype, # nolint
   "emissionsCovered" = { # nolint
