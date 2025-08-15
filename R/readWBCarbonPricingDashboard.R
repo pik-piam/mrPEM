@@ -55,9 +55,9 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
     left_join(wbRegionMapping, by = "unique_id") %>%
     left_join(wbSectoralMapping, by = "unique_id") %>%
     dplyr::select(c("unique_id", "region", "region_type", "sector_group",
-                    "share_of_jurisdiction_emissionsCovered")) %>%
+                    "share_of_jurisdiction_emissions_covered")) %>%
     tidyr::extract(
-      .data$share_of_jurisdiction_emissionsCovered,
+      .data$share_of_jurisdiction_emissions_covered,
       into = c("emissions_coverage", "global_emissions"),
       regex = "(\\d+\\.?\\d*)% of jurisdiction emissions, (\\d+\\.?\\d*)% of global emissions",
       remove = TRUE
