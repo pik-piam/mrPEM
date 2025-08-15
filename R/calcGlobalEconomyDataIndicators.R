@@ -3,14 +3,14 @@
 #' Effective Carbon Price is calculated from world bank emissions share Coverage,
 #' EDGAR Global GHG Emissions and World Bank Carbon Price data.
 #'
-#' @param subtype data subtype. Either "emissionsCovered", "shareEmissionsCovered", "carbonPrice", "effectivePrice"
+#' @param outPeriod vector of years to include in the output
 #' @returns MAgPIE object with Effective Carbon Price per country and sector group
 #'
 #' @author Renato Rodrigues
 #'
 #' @examples
 #' \dontrun{
-#' calcOutput("WBCarbonPricingDashboard", subtype = "price")
+#' calcOutput("GlobalEconomyDataIndicators", outPeriod = 2003:2021)
 #' }
 #'
 #' @importFrom quitte as.quitte
@@ -19,6 +19,7 @@
 #'  summarise arrange rowwise count
 #' @importFrom zoo na.approx na.locf
 #' @importFrom stringr str_to_lower
+#' @importFrom stats weighted.mean
 #'
 calcGlobalEconomyDataIndicators <- function(outPeriod = 2003:2021) {
 
@@ -61,7 +62,7 @@ calcGlobalEconomyDataIndicators <- function(outPeriod = 2003:2021) {
       dplyr::filter(.data$na_is_zero) %>%
       tidyr::complete(.data$region, .data$driver, .data$period) %>%
       dplyr::select(- c("driver_name", "unit", "weight", "duplicated", "na_is_zero", "type")) %>%
-      dplyr::left_join(indicatorsMapping %>% dplyr::distinct(.data$driver, .keep_all = TRUE), by = c("driver")) %>%
+      dplyr::left_join(indicatorsMapping %>% dplyr::distinct(.data$driver, .keep_all = TRUE), by = c("driver")) %>% # nolint
       dplyr::relocate("type", .after = "region") %>%
       dplyr::group_by(.data$type, .data$driver) %>%
       dplyr::mutate(value = tidyr::replace_na(.data$value, 0))
@@ -104,7 +105,7 @@ calcGlobalEconomyDataIndicators <- function(outPeriod = 2003:2021) {
     dplyr::filter(!is.na(.data$value)) %>%
     group_by(.data$RegionCode, .data$driver, .data$driver_name, .data$unit, .data$weight, .data$period) %>%
     dplyr::summarise(
-      reg_avg = weighted.mean(.data$value, .data$weight_val, na.rm = TRUE),
+      reg_avg = stats::weighted.mean(.data$value, .data$weight_val, na.rm = TRUE),
       reg_weight_mean = mean(.data$weight_val, na.rm = TRUE),
       .groups = "drop"
     )

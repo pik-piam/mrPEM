@@ -1,6 +1,6 @@
 # Prepare data to be used by the Political Economy Model (PEM)
 
-R package **mrPEM**, version **0.0.1**
+R package **mrPEM**, version **0.0.2**
 
 [![CRAN status](https://www.r-pkg.org/badges/version/mrPEM)](https://cran.r-project.org/package=mrPEM) [![R build status](https://github.com/pik-piam/mrPEM/workflows/check/badge.svg)](https://github.com/pik-piam/mrPEM/actions) [![codecov](https://codecov.io/gh/pik-piam/mrPEM/branch/master/graph/badge.svg)](https://app.codecov.io/gh/pik-piam/mrPEM) 
 
@@ -38,17 +38,17 @@ In case of questions / problems please contact Renato Rodrigues <renato.rodrigue
 
 To cite package **mrPEM** in publications use:
 
-Rodrigues R, Elmar K (2025). "mrPEM: Prepare data to be used by the Political Economy Model (PEM)." Version: 0.0.1, <https://github.com/pik-piam/mrPEM>.
+Rodrigues R, Kriegler E (2025). "mrPEM: Prepare data to be used by the Political Economy Model (PEM)." Version: 0.0.2, <https://github.com/pik-piam/mrPEM>.
 
 A BibTeX entry for LaTeX users is
 
  ```latex
 @Misc{,
   title = {mrPEM: Prepare data to be used by the Political Economy Model (PEM)},
-  author = {Renato Rodrigues and Kriegler Elmar},
-  date = {2025-08-08},
+  author = {Renato Rodrigues and Elmar Kriegler},
+  date = {2025-08-15},
   year = {2025},
   url = {https://github.com/pik-piam/mrPEM},
-  note = {Version: 0.0.1},
+  note = {Version: 0.0.2},
 }
 ```

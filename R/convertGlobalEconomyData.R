@@ -2,7 +2,7 @@
 #' aggregation of over 500 indicators for over 200 countries from 1960 - 2024.
 #' sources: central banks, national statistical institutes, and multiple international organizations.
 #' https://www.theglobaleconomy.com/
-#' 
+#'
 #' @md
 #' @param x A [`magpie`][magclass::magclass] object returned from
 #'          [`readWBCarbonPricingDashboard()`].
