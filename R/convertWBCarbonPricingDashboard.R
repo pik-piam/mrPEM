@@ -4,14 +4,12 @@
 #' @param x A [`magpie`][magclass::magclass] object returned from
 #'          [`readWBCarbonPricingDashboard()`].
 #'
-#' @param subtype character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissions_covered
+#' @param subtype character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissionsCovered
 #'
 #' @return A [`magpie`][magclass::magclass] object.
 #'
 #' @author Renato Rodrigues
 #'
-#' @importFrom madrat toolCountryFill toolFillYears
-#' @importFrom magclass getYears magpiesort
 #'
 convertWBCarbonPricingDashboard <- function(x, subtype) {
 

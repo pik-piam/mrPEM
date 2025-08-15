@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: If you use this software, please cite it using the metadata from this file.
 type: software
 title: 'mrPEM: Prepare data to be used by the Political Economy Model (PEM)'
-version: 0.0.2
+version: 0.1.0
 date-released: '2025-08-15'
 abstract: Prepare data to be used by the Political Economy Model (PEM).
 authors:

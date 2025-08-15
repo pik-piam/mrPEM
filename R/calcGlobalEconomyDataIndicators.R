@@ -1,10 +1,9 @@
-#' Calculate the Effective Carbon Price based on the World Bank dashboard data
+#' Calculate the Global Economy Data indicators including assumptions to fill all missing country data
 #'
-#' Effective Carbon Price is calculated from world bank emissions share Coverage,
-#' EDGAR Global GHG Emissions and World Bank Carbon Price data.
-#'
-#' @param outPeriod vector of years to include in the output
-#' @returns MAgPIE object with Effective Carbon Price per country and sector group
+#' @param outPeriod vector of years to include in the output. Default is 2003:2021.
+#'  Make sure to include years with enough data.
+#' @returns MAgPIE object with Global Economy Data indicators per indicator type, indicator name, indicator unit,
+#'  country and period
 #'
 #' @author Renato Rodrigues
 #'

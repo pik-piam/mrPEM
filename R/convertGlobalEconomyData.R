@@ -11,8 +11,6 @@
 #'
 #' @author Renato Rodrigues
 #'
-#' @importFrom madrat toolCountryFill toolFillYears
-#' @importFrom magclass getYears magpiesort
 #'
 convertGlobalEconomyData <- function(x) {
 

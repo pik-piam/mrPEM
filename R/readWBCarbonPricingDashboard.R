@@ -2,7 +2,7 @@
 #'
 #' This data can be downloaded directly from the site.
 #'
-#' @param subtype character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissions_covered
+#' @param subtype character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissionsCovered
 #' @returns MagPIE object with world banck data on carbon price per country
 #'
 #' @author Renato Rodrigues
@@ -11,8 +11,6 @@
 #' @importFrom dplyr select all_of matches mutate left_join across filter %>% rename_with join_by group_by
 #' bind_rows case_when .data summarize coalesce
 #' @importFrom tidyr extract pivot_longer
-#' @importFrom magclass as.magpie
-#' @importFrom madrat toolCountryFill toolGetMapping
 #' @importFrom quitte as.quitte
 #'
 readWBCarbonPricingDashboard <- function(subtype = "price") {
@@ -57,9 +55,9 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
     left_join(wbRegionMapping, by = "unique_id") %>%
     left_join(wbSectoralMapping, by = "unique_id") %>%
     dplyr::select(c("unique_id", "region", "region_type", "sector_group",
-                    "share_of_jurisdiction_emissions_covered")) %>%
+                    "share_of_jurisdiction_emissionsCovered")) %>%
     tidyr::extract(
-      .data$share_of_jurisdiction_emissions_covered,
+      .data$share_of_jurisdiction_emissionsCovered,
       into = c("emissions_coverage", "global_emissions"),
       regex = "(\\d+\\.?\\d*)% of jurisdiction emissions, (\\d+\\.?\\d*)% of global emissions",
       remove = TRUE
@@ -144,7 +142,7 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
          "revenue" = { dd <- wbRevenue }, # nolint
          "wbCoverage" = { dd <- wbCoverage }, # nolint
          "priceAprilFirst" = { dd <- priceAprilFirst }, # nolint
-         "emissions_covered" = { dd <- wbEmissionsCovered }) # nolint
+         "emissionsCovered" = { dd <- wbEmissionsCovered }) # nolint
 
   #expand EU ETS data to all EU countries
   EU27 <- c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA", "DEU", "GRC", "HUN", "IRL", "ITA", # nolint
@@ -162,7 +160,7 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
         dplyr::mutate(region_type = "country") %>%
         select(all_of(names(dd)))
     )
-  } else if (subtype %in% c("emissions_covered")) {
+  } else if (subtype %in% c("emissionsCovered")) {
     # country ETS coverage proportional to country bulk emissions size
     bulk <- c("Industrial Combustion", "Power Industry", "Processes", "Fuel Exploitation")
     emiBulk <- histEmiSectorRaw %>%
