@@ -16,10 +16,9 @@
 #'
 convertGlobalEconomyData <- function(x) {
 
-  x[is.na(x)] <- 0 # setting NA values to zero
-  x <- madrat::toolFillYears(x, sort(magclass::getYears(x, as.integer = TRUE)))
-  x <- madrat::toolCountryFill(x, fill = 0, verbosity = 2)
   x <- magpiesort(x)
+  x <- madrat::toolFillYears(x, sort(magclass::getYears(x, as.integer = TRUE)))
+  x <- madrat::toolCountryFill(x, fill = NA, verbosity = 2)
 
   return(x)
 }

@@ -122,11 +122,10 @@ calcEffectiveCarbonPrice <- function(subtype = "effectivePrice") {
   gdp <- calcOutput("GDPPast", aggregate = FALSE)
   gdpPerCapita <- magclass::collapseNames(gdp[, intersect(getYears(pop), getYears(gdp)), ] / pop[, intersect(getYears(pop), getYears(gdp)), ]) # nolint
   #copying last year for missing years
-  tmp <- tmp2 <- tmp3 <- gdpPerCapita[, 2022, ]
-  magclass::getYears(tmp) <- 2023
-  magclass::getYears(tmp2) <- 2024
-  magclass::getYears(tmp3) <- 2025
-  gdpPerCapita <- magclass::mbind(gdpPerCapita, tmp, tmp2, tmp3)
+  tmp <- tmp2 <- gdpPerCapita[, 2023, ]
+  magclass::getYears(tmp) <- 2024
+  magclass::getYears(tmp2) <- 2025
+  gdpPerCapita <- magclass::mbind(gdpPerCapita, tmp, tmp2)
 
   switch(subtype, # nolint
   "emissionsCovered" = { # nolint
