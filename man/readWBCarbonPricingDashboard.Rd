@@ -7,7 +7,7 @@
 readWBCarbonPricingDashboard(subtype = "price")
 }
 \arguments{
-\item{subtype}{character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissions_covered}
+\item{subtype}{character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissionsCovered}
 }
 \value{
 MagPIE object with world banck data on carbon price per country
