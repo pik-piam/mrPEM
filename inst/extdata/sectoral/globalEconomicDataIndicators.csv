@@ -380,12 +380,12 @@ Religious composition of the population;People_practicing_Judaism_as_percent_of_
 Religious composition of the population;Protestant_Christians_as_percent_of_the_total_population;Protestant Christians;% (total population);;;TRUE
 Religious composition of the population;Shia_Muslims_as_percent_of_the_total_population;Shia Muslims;% (total population);;;TRUE
 Religious composition of the population;Sunni_Muslims_as_percent_of_the_total_population;Sunni Muslims;% (total population);;;TRUE
-Shares of world totals;Percent_of_world_exports;Exports;% (World);GDPperCapita;;
-Shares of world totals;Percent_of_world_Foreign_Direct_Investment;Foreign Direct Investment;% (World);GDPperCapita;TRUE;
-Shares of world totals;Percent_of_world_GDP;GDP;% (World);GDPperCapita;;
-Shares of world totals;Percent_of_world_imports;Imports;% (World);GDPperCapita;;
-Shares of world totals;Percent_of_world_oil_reserves;Oil reserves;% (World);GDPperCapita;;
-Shares of world totals;Percent_of_world_population;Population;% (World);GDPperCapita;;
+Shares of world totals;Percent_of_world_exports;Exports;% (World);GDPperCapita;;TRUE
+Shares of world totals;Percent_of_world_Foreign_Direct_Investment;Foreign Direct Investment;% (World);GDPperCapita;TRUE;TRUE
+Shares of world totals;Percent_of_world_GDP;GDP;% (World);GDPperCapita;;TRUE
+Shares of world totals;Percent_of_world_imports;Imports;% (World);GDPperCapita;;TRUE
+Shares of world totals;Percent_of_world_oil_reserves;Oil reserves;% (World);GDPperCapita;;TRUE
+Shares of world totals;Percent_of_world_population;Population;% (World);GDPperCapita;;TRUE
 Stock market, insurance, pensions;Insurance_company_assets_percent_of_GDP;Insurance company assets;% (GDP);GDPperCapita;;
 Stock market, insurance, pensions;Life_insurance_premium_volume_percent_of_GDP;Life insurance premium volume;% (GDP);GDPperCapita;;
 Stock market, insurance, pensions;Mutual_fund_assets_percent_of_GDP;Mutual fund assets;% (GDP);GDPperCapita;;
