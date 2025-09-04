@@ -40,10 +40,13 @@ calcCarbonPrice <- function(subtype = "effectivePrice") {
   bunkers <- c("Aviation", "Shipping")
   histEmiRaw <- madrat::readSource("EDGARghg")
   #copying last year for missing years
-  tmp <- tmp2 <- histEmiRaw[, 2023, ]
-  magclass::getYears(tmp) <- 2024
-  magclass::getYears(tmp2) <- 2025
-  histEmi <- magclass::mbind(histEmiRaw, tmp, tmp2)[, getYears(wbEmissionsCovered), ]
+  missYears <- setdiff(c(2000:2025), getYears(histEmiRaw, as.integer = TRUE))
+  for(y in missYears){
+    tmp <- histEmiRaw[, max(getYears(histEmiRaw, as.integer = TRUE)), ]
+    magclass::getYears(tmp) <- y
+    histEmiRaw <- magclass::mbind(histEmiRaw, tmp)
+  }
+  histEmi <- histEmiRaw[, getYears(wbEmissionsCovered), ]
   histEmiBulk <- setNames(magclass::dimSums(magclass::mselect(histEmi, variable = bulk), 3, na.rm = TRUE), "bulk")
   histEmiDiffuse <- setNames(magclass::dimSums(magclass::mselect(histEmi, variable = diffuse), 3, na.rm = TRUE)
                              , "diffuse")
@@ -134,19 +137,19 @@ calcCarbonPrice <- function(subtype = "effectivePrice") {
     }, # nolint
   "shareEmissionsCovered" = { # nolint
     data <- shareEmissionsCoveredPerSectorGroup
-    weight <- gdpPerCapita[, getYears(shareEmissionsCoveredPerSectorGroup), ]
+    weight <- histEmiPerSectorGroup[,getYears(shareEmissionsCoveredPerSectorGroup),getNames(shareEmissionsCoveredPerSectorGroup)]
     dataDescription <- "Share of emissions covered by carbon price instruments in a given country and a sector group"
     dataUnit <- "fraction"
     }, # nolint
   "carbonPrice" = { # nolint
     data <- carbonPrice
-    weight <- gdpPerCapita[, getYears(carbonPrice), ]
+    weight <- histEmiPerSectorGroup[,getYears(carbonPrice),getNames(carbonPrice)]
     dataDescription <- "Carbon price per sector group based on the World Bank dashboard data"
     dataUnit <- "US$2017/t CO2"
     }, # nolint
   "effectivePrice" = { # nolint
     data <- effectivePrice
-    weight <- gdpPerCapita[, getYears(effectivePrice), ]
+    weight <- histEmiPerSectorGroup[,getYears(effectivePrice),getNames(effectivePrice)]
     dataDescription <- "Effective carbon price per sector group based on the World Bank and historical data"
     dataUnit <- "US$2017/t CO2"
     }) # nolint
