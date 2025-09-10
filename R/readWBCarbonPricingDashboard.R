@@ -160,19 +160,33 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
         dplyr::mutate(region_type = "country") %>%
         select(all_of(names(dd)))
     )
-    # if the country has a higher carbon tax applied to the bulk sectors than the ETS EU price, set the carbon tax to the difference of them
-    additionalCP <- dd %>% filter(.data$region %in% EU_ETS, .data$region_type == "country", .data$type == "carbon_tax", .data$status == "implemented", .data$sector_group == "bulk") %>%
-      left_join(
-        data %>%
-          filter(.data$region %in% EU_ETS, .data$unique_id == "ETS_EU", .data$region_type == "country", .data$type == "ets", .data$status == "implemented", .data$sector_group == "bulk") %>%
-          rename(ets_value = .data$value) %>%
-          select(region, period, ets_value),
-          by = c("region", "period")) %>%
+    # if the country has a higher carbon tax applied to the bulk sectors than the ETS EU price, set it to the difference
+    additionalCP <- dd %>%
+      filter(.data$region %in% EU_ETS,
+             .data$region_type == "country",
+             .data$type == "carbon_tax",
+             .data$status == "implemented",
+             .data$sector_group == "bulk") %>%
+      left_join(data %>%
+                  filter(.data$region %in% EU_ETS,
+                         .data$unique_id == "ETS_EU",
+                         .data$region_type == "country",
+                         .data$type == "ets",
+                         .data$status == "implemented",
+                         .data$sector_group == "bulk") %>%
+                  rename(ets_value = .data$value) %>%
+                  select("region", "period", "ets_value"),
+                by = c("region", "period")) %>%
       mutate(diff = .data$value - .data$ets_value) %>%
       select(-c("value", "ets_value")) %>%
       rename(value = .data$diff) %>%
-      filter(value > 0)
-    data <- data %>% filter(!((.data$region %in% EU_ETS) & (.data$region_type == "country") & (.data$type == "carbon_tax") & (.data$status == "implemented") & (.data$sector_group == "bulk"))) %>%
+      filter(.data$value > 0)
+    data <- data %>%
+      filter(!((.data$region %in% EU_ETS)
+               & (.data$region_type == "country")
+               & (.data$type == "carbon_tax")
+               & (.data$status == "implemented")
+               & (.data$sector_group == "bulk"))) %>%
       rbind(additionalCP)
   } else if (subtype %in% c("emissionsCovered")) {
     # country ETS coverage proportional to country bulk emissions size

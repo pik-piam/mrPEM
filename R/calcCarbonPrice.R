@@ -41,7 +41,7 @@ calcCarbonPrice <- function(subtype = "effectivePrice") {
   histEmiRaw <- madrat::readSource("EDGARghg")
   #copying last year for missing years
   missYears <- setdiff(c(2000:2025), getYears(histEmiRaw, as.integer = TRUE))
-  for(y in missYears){
+  for (y in missYears){
     tmp <- histEmiRaw[, max(getYears(histEmiRaw, as.integer = TRUE)), ]
     magclass::getYears(tmp) <- y
     histEmiRaw <- magclass::mbind(histEmiRaw, tmp)
@@ -137,19 +137,20 @@ calcCarbonPrice <- function(subtype = "effectivePrice") {
     }, # nolint
   "shareEmissionsCovered" = { # nolint
     data <- shareEmissionsCoveredPerSectorGroup
-    weight <- histEmiPerSectorGroup[,getYears(shareEmissionsCoveredPerSectorGroup),getNames(shareEmissionsCoveredPerSectorGroup)]
-    dataDescription <- "Share of emissions covered by carbon price instruments in a given country and a sector group"
+    weight <-
+      histEmiPerSectorGroup[, getYears(shareEmissionsCoveredPerSectorGroup), getNames(shareEmissionsCoveredPerSectorGroup)] # nolint
+    dataDescription <- "Share of emissions covered by carbon price instruments in a given country and a sector group" # nolint
     dataUnit <- "fraction"
     }, # nolint
   "carbonPrice" = { # nolint
     data <- carbonPrice
-    weight <- histEmiPerSectorGroup[,getYears(carbonPrice),getNames(carbonPrice)]
+    weight <- histEmiPerSectorGroup[, getYears(carbonPrice), getNames(carbonPrice)]
     dataDescription <- "Carbon price per sector group based on the World Bank dashboard data"
     dataUnit <- "US$2017/t CO2"
     }, # nolint
   "effectivePrice" = { # nolint
     data <- effectivePrice
-    weight <- histEmiPerSectorGroup[,getYears(effectivePrice),getNames(effectivePrice)]
+    weight <- histEmiPerSectorGroup[, getYears(effectivePrice), getNames(effectivePrice)]
     dataDescription <- "Effective carbon price per sector group based on the World Bank and historical data"
     dataUnit <- "US$2017/t CO2"
     }) # nolint

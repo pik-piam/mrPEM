@@ -2,19 +2,20 @@
 % Please edit documentation in R/calcGlobalEconomyDataIndicators.R
 \name{calcGlobalEconomyDataIndicators}
 \alias{calcGlobalEconomyDataIndicators}
-\title{Calculate the Effective Carbon Price based on the World Bank dashboard data}
+\title{Calculate the Global Economy Data indicators including assumptions to fill all missing country data}
 \usage{
 calcGlobalEconomyDataIndicators(outPeriod = 2003:2021)
 }
 \arguments{
-\item{outPeriod}{vector of years to include in the output}
+\item{outPeriod}{vector of years to include in the output. Default is 2003:2021.
+Make sure to include years with enough data.}
 }
 \value{
-MAgPIE object with Effective Carbon Price per country and sector group
+MAgPIE object with Global Economy Data indicators per indicator type, indicator name, indicator unit,
+country and period
 }
 \description{
-Effective Carbon Price is calculated from world bank emissions share Coverage,
-EDGAR Global GHG Emissions and World Bank Carbon Price data.
+Calculate the Global Economy Data indicators including assumptions to fill all missing country data
 }
 \examples{
 \dontrun{
