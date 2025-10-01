@@ -60,7 +60,7 @@ calcGlobalEconomyDataIndicators <- function(outPeriod = 2003:2021) {
     fillLongData %>%
       dplyr::filter(.data$na_is_zero) %>%
       tidyr::complete(.data$driver, .data$period) %>%
-      dplyr::select(- c("driver_name", "unit", "weight", "duplicated", "na_is_zero", "type")) %>%
+      dplyr::select(- c("driver_name", "unit", "weight", "duplicated", "na_is_zero", "type", "source")) %>%
       dplyr::left_join(indicatorsMapping %>% dplyr::distinct(.data$driver, .keep_all = TRUE), by = c("driver")) %>% # nolint
       dplyr::relocate("type", .after = "region") %>%
       dplyr::group_by(.data$type, .data$driver) %>%
