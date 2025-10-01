@@ -38,7 +38,8 @@ In case of questions / problems please contact Renato Rodrigues <renato.rodrigue
 
 To cite package **mrPEM** in publications use:
 
-Rodrigues R, Kriegler E (2025). "mrPEM: Prepare data to be used by the Political Economy Model (PEM)." Version: 0.1.0, <https://github.com/pik-piam/mrPEM>.
+Rodrigues R, Kriegler, E (2025). "mrPEM: Prepare data to be used by the Political Economy Model (PEM)." Version: 0.0.1, <https://github.com/pik-piam/mrPEM>.
+
 
 A BibTeX entry for LaTeX users is
 
