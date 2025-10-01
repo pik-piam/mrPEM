@@ -20,7 +20,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Kriegler Elmar \email{kriegler@pik-potsdam.de} (\href{https://orcid.org/0000-0002-3307-2647}{ORCID})
+  \item Elmar Kriegler \email{kriegler@pik-potsdam.de} (\href{https://orcid.org/0000-0002-3307-2647}{ORCID})
 }
 
 }

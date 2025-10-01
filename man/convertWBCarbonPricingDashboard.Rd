@@ -10,7 +10,7 @@ convertWBCarbonPricingDashboard(x, subtype)
 \item{x}{A \code{\link[magclass:magclass-package]{magpie}} object returned from
 \code{\link[=readWBCarbonPricingDashboard]{readWBCarbonPricingDashboard()}}.}
 
-\item{subtype}{character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissions_covered}
+\item{subtype}{character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissionsCovered}
 }
 \value{
 A \code{\link[magclass:magclass-package]{magpie}} object.

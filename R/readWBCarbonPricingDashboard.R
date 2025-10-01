@@ -2,7 +2,7 @@
 #'
 #' This data can be downloaded directly from the site.
 #'
-#' @param subtype character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissions_covered
+#' @param subtype character, type of data: price, priceAprilFirst, wbCoverage, revenue, emissionsCovered
 #' @returns MagPIE object with world banck data on carbon price per country
 #'
 #' @author Renato Rodrigues
@@ -11,8 +11,6 @@
 #' @importFrom dplyr select all_of matches mutate left_join across filter %>% rename_with join_by group_by
 #' bind_rows case_when .data summarize coalesce
 #' @importFrom tidyr extract pivot_longer
-#' @importFrom magclass as.magpie
-#' @importFrom madrat toolCountryFill toolGetMapping
 #' @importFrom quitte as.quitte
 #'
 readWBCarbonPricingDashboard <- function(subtype = "price") {
@@ -144,7 +142,7 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
          "revenue" = { dd <- wbRevenue }, # nolint
          "wbCoverage" = { dd <- wbCoverage }, # nolint
          "priceAprilFirst" = { dd <- priceAprilFirst }, # nolint
-         "emissions_covered" = { dd <- wbEmissionsCovered }) # nolint
+         "emissionsCovered" = { dd <- wbEmissionsCovered }) # nolint
 
   #expand EU ETS data to all EU countries
   EU27 <- c("AUT", "BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "FRA", "DEU", "GRC", "HUN", "IRL", "ITA", # nolint
@@ -162,7 +160,35 @@ readWBCarbonPricingDashboard <- function(subtype = "price") {
         dplyr::mutate(region_type = "country") %>%
         select(all_of(names(dd)))
     )
-  } else if (subtype %in% c("emissions_covered")) {
+    # if the country has a higher carbon tax applied to the bulk sectors than the ETS EU price, set it to the difference
+    additionalCP <- dd %>%
+      filter(.data$region %in% EU_ETS,
+             .data$region_type == "country",
+             .data$type == "carbon_tax",
+             .data$status == "implemented",
+             .data$sector_group == "bulk") %>%
+      left_join(data %>%
+                  filter(.data$region %in% EU_ETS,
+                         .data$unique_id == "ETS_EU",
+                         .data$region_type == "country",
+                         .data$type == "ets",
+                         .data$status == "implemented",
+                         .data$sector_group == "bulk") %>%
+                  rename(ets_value = .data$value) %>%
+                  select("region", "period", "ets_value"),
+                by = c("region", "period")) %>%
+      mutate(diff = .data$value - .data$ets_value) %>%
+      select(-c("value", "ets_value")) %>%
+      rename(value = .data$diff) %>%
+      filter(.data$value > 0)
+    data <- data %>%
+      filter(!((.data$region %in% EU_ETS)
+               & (.data$region_type == "country")
+               & (.data$type == "carbon_tax")
+               & (.data$status == "implemented")
+               & (.data$sector_group == "bulk"))) %>%
+      rbind(additionalCP)
+  } else if (subtype %in% c("emissionsCovered")) {
     # country ETS coverage proportional to country bulk emissions size
     bulk <- c("Industrial Combustion", "Power Industry", "Processes", "Fuel Exploitation")
     emiBulk <- histEmiSectorRaw %>%
