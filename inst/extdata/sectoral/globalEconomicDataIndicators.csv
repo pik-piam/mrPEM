@@ -111,7 +111,7 @@ Education spending and outcomes;Student_teacher_ratio_primary_school;Student tea
 Education spending and outcomes;Tertiary_school_enrollment_percent_of_all_eligible_children;Tertiary school enrollment;% (eligible children);GDPperCapita;;;UNESCO
 Education spending and outcomes;Trained_teachers_in_primary_education_percent_of_total;Trained teachers in primary education;% (total teachers);GDPperCapita;;;UNESCO
 Education spending and outcomes;Youth_literacy_rate_ages_15_24;Youth literacy rate ages 15 24;% (0-100);GDPperCapita;;;UNESCO
-Energy and environment;Access_to_electricity_percent_of_the_population;Access to electricity;% (population);GDPperCapita;;;The World Bank
+Energy and environment;Access_to_electricity_percent_of_the_population;Access to electricity;% (population);population;;;The World Bank
 Energy and environment;Alternative_and_nuclear_energy_percent_of_total_energy_use;Alternative and nuclear energy;% (total energy use);GDPperCapita;;;The World Bank
 Energy and environment;Carbon_dioxide_emissions_per_capita;Carbon dioxide emissions per capita;t CO2 eq per capita;GDPperCapita;;;The World Bank
 Energy and environment;Carbon_dioxide_emissions_thousands_of_tonnes;Carbon dioxide emissions;Mt CO2eq;GDPperCapita;;;The World Bank
