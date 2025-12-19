@@ -105,7 +105,7 @@ calcGlobalEconomyDataIndicators <- function(outPeriod = 2003:2021) {
     group_by(.data$RegionCode, .data$driver, .data$driver_name, .data$unit, .data$weight, .data$period) %>%
     dplyr::summarise(
       reg_avg = stats::weighted.mean(.data$value, .data$weight_val, na.rm = TRUE),
-      reg_weight_mean = mean(.data$weight_val, na.rm = TRUE),
+      reg_weight_sum = sum(.data$weight_val, na.rm = TRUE),  # Changed to sum
       .groups = "drop"
     )
 
@@ -119,7 +119,7 @@ calcGlobalEconomyDataIndicators <- function(outPeriod = 2003:2021) {
       value_filled = case_when(
         !is.na(.data$value) ~ .data$value,                                   # keep existing values
         .data$is_percent_like ~ .data$reg_avg,                               # no scaling for relative indicators
-        TRUE ~ .data$reg_avg * (.data$weight_val / .data$reg_weight_mean)    # scale absolute measures
+        TRUE ~ .data$reg_avg * (.data$weight_val / .data$reg_weight_sum)     # scale absolute measures
       ),
       fill_type = case_when(
         !is.na(.data$value) ~ "original",
